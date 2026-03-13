@@ -6,16 +6,23 @@ Here, you will find both the high-performance techniques commonly used in embedd
 
 ## Overview
 
-Currently, this repository includes three core data structure implementations:
+Currently, this repository includes four core data structure implementations:
 
-### 1. Dynamic Array (Vector)
+### 1. Hash Table
+
+Located in `hash_table/hash_table.c`, this is a generic Separate Chaining Hash Table.
+
+- **How it works:** It uses an array of linked list "buckets" to handle hash collisions. The generic type support is achieved by copying the true memory bytes using `void *`, `memcpy`, and explicit sizes (`key_size`, `val_size`).
+- **Features:** Supports custom size mappings (e.g., `size_t` keys mapping to `size_t` values), resolving collisions automatically without overwriting existing data.
+
+### 2. Dynamic Array (Vector)
 
 Located in `dynamic_array/vector.c`, this is a standard Vector implementation.
 
 - It dynamically resizes itself (using `malloc` and `memcpy`) when it runs out of capacity, ensuring continuous memory allocation.
 - It is fully generic! Thanks to the use of `uint8_t*` and tracking element sizes, it can store any data type.
 
-### 2. Intrusive Linked List
+### 3. Intrusive Linked List
 
 Located in `linked_list_intrusive/linked_list.c`, this showcases the famous Linux kernel-style "intrusive" linked list design.
 
@@ -23,7 +30,7 @@ Located in `linked_list_intrusive/linked_list.c`, this showcases the famous Linu
 - **Benefits:** This entirely eliminates the need for extra `malloc` calls per node, drastically improving cache locality and overall performance.
 - It uses the legendary `container_of` macro to calculate the parent structure's memory address from its embedded list pointer.
 
-### 3. Non-Intrusive Linked List
+### 4. Non-Intrusive Linked List
 
 Located in `linked_list_non_intrusive/linked_list.c`, this is the classic Doubly Linked List taught in most computer science classes.
 
@@ -49,6 +56,6 @@ cmake --build . --target run
 
 *(Note: If you are at the project root directory, you can instead use `cmake --build build --target run`)*
 
-After building, you will find the executable files (`vector`, `linked_list_intrusive`, and `linked_list_non_intrusive`) generated in your build directory (or inside a `Debug` / `Release` subfolder if using MSVC on Windows).
+After building, you will find the executable files (`hash_table`, `vector`, `linked_list_intrusive`, and `linked_list_non_intrusive`) generated in your build directory (or inside a `Debug` / `Release` subfolder if using MSVC on Windows).
 
 Feel free to explore the `main` functions inside each source file to see real examples of how these data structures are utilized. Happy coding!

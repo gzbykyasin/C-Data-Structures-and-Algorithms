@@ -20,11 +20,15 @@ add_executable(linked_list_intrusive linked_list_intrusive/linked_list.c)
 # 3. Non-Intrusive Linked List
 add_executable(linked_list_non_intrusive linked_list_non_intrusive/linked_list.c)
 
+# 4. Hash Table
+add_executable(hash_table hash_table/hash_table.c)
+
 # Custom target to explicitly build and run all executables
 add_custom_target(run
     COMMAND $<TARGET_FILE:vector>
     COMMAND $<TARGET_FILE:linked_list_intrusive>
     COMMAND $<TARGET_FILE:linked_list_non_intrusive>
-    DEPENDS vector linked_list_intrusive linked_list_non_intrusive
+    COMMAND $<TARGET_FILE:hash_table>
+    DEPENDS vector linked_list_intrusive linked_list_non_intrusive hash_table
     COMMENT "Running all data structure algorithms..."
 )
