@@ -23,12 +23,20 @@ add_executable(linked_list_non_intrusive linked_list_non_intrusive/linked_list.c
 # 4. Hash Table
 add_executable(hash_table hash_table/hash_table.c)
 
+# 5. Stack (Dynamic Array)
+add_executable(stack_dynamic_array stack/dynamic_array/stack.c)
+
+# 6. Stack (Linked List)
+add_executable(stack_linked_list_non_intrusive stack/linked_list_non_intrusive/stack.c)
+
 # Custom target to explicitly build and run all executables
 add_custom_target(run
     COMMAND $<TARGET_FILE:vector>
     COMMAND $<TARGET_FILE:linked_list_intrusive>
     COMMAND $<TARGET_FILE:linked_list_non_intrusive>
     COMMAND $<TARGET_FILE:hash_table>
-    DEPENDS vector linked_list_intrusive linked_list_non_intrusive hash_table
+    COMMAND $<TARGET_FILE:stack_dynamic_array>
+    COMMAND $<TARGET_FILE:stack_linked_list_non_intrusive>
+    DEPENDS vector linked_list_intrusive linked_list_non_intrusive hash_table stack_dynamic_array stack_linked_list_non_intrusive
     COMMENT "Running all data structure algorithms..."
 )

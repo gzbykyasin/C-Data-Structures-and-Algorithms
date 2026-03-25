@@ -37,6 +37,20 @@ Located in `linked_list_non_intrusive/linked_list.c`, this is the classic Doubly
 - **How it works:** The list managing logic is completely unaware of the actual data. Whenever you add an item, the list internally calls `calloc` to create a new `Node_t` and `malloc` to hold a copy of your data.
 - **Pros & Cons:** It is much more beginner-friendly and easier to interface with. However, because it requires separate heap allocations (`malloc` & `calloc`) for every single element, it's generally slower and can lead to memory fragmentation.
 
+### 5. Stack (Dynamic Array)
+
+Located in `stack/dynamic_array/stack.c`, this implements a Last-In-First-Out (LIFO) stack using a contiguous dynamic array.
+
+- **How it works:** Similar to the generic Vector, it uses `malloc`, capacity expansion, and `memcpy` to manage an underlying array. Pushing to the top of the stack is extremely fast and cache-friendly.
+- **Pros & Cons:** O(1) amortized push and pop operations with superior data locality. Occasional capacity scaling requires allocating a larger block and copying data.
+
+### 6. Stack (Linked List)
+
+Located in `stack/linked_list_non_intrusive/stack.c`, this implements a Last-In-First-Out (LIFO) stack using a non-intrusive singly linked list structure.
+
+- **How it works:** Each element pushed onto the stack triggers new dynamical allocations for both the `Node_t` container and the copied data, which are then linked to point to the previous head.
+- **Pros & Cons:** No massive re-allocation pauses since nodes are allocated entirely on demand. However, the constant `malloc`/`free` calls per push/pop create substantial overhead and memory fragmentation.
+
 ## Building and Running
 
 This project uses `CMake` as its build system. To compile the code on your machine, simply run:
